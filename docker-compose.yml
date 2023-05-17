@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mongo:
+    container_name: mongo-sleepr
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_DATABASE="sleepr"
+    ports:
+      - 27017:27017
+    networks:
+      - bridge
+
+  mongo-express:
+    container_name: mongo-sleepr-express
+    image: mongo-express
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+    depends_on:
+      - mongo
+    ports:
+      - 7200:8081
+    networks:
+      - bridge
+networks:
+  bridge:
