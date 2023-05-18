@@ -4,7 +4,7 @@ import { IsDate, IsString } from 'class-validator';
 export class CreateReservationDto {
   @IsDate()
   @Type(() => Date)
-  startDate: number;
+  startDate: Date;
 
   @IsDate()
   @Type(() => Date)
