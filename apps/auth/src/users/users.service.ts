@@ -8,10 +8,22 @@ import { CreateUserDto } from './dto/create-user';
 import { UsersRepository } from './users.repository';
 import { UsersDocument } from './model/users.schema';
 import * as bcrypt from 'bcryptjs';
+import { Error } from 'mongoose';
+import { getUserDto } from './dto/get-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
+
+  async getUserById(user: getUserDto): Promise<UsersDocument> {
+    try {
+      return this.userRepository.findOne(user);
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      }
+    }
+  }
 
   async create(user: CreateUserDto) {
     const hashedPassword = await this.hashPassword(user.password);
