@@ -4,15 +4,18 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY yarn.lock ./
+COPY tsconfig.json tsconfig.json
 
 # RUN npm install -g yarn
 
 RUN yarn install
 
-COPY . .
+COPY apps/auth apps/auth
+COPY libs libs
 
-RUN npm run build
+RUN cd apps/auth && yarn
 
+RUN npm run build auth
 
 FROM node:18-alpine as production
 

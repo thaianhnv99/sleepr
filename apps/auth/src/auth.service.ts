@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UsersDocument } from './users/model/users.schema';
+import { UsersDocument } from '../../../libs/common/src/model/users.schema';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';

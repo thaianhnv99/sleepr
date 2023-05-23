@@ -23,8 +23,8 @@ export class CreateReservationDto {
   @IsString()
   invoiceId: string;
 
-  @IsDefined()
-  @IsNotEmpty()
+  // @IsDefined()
+  // @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateChargeDto)
   charge: CreateChargeDto;

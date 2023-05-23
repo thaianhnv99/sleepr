@@ -4,15 +4,18 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY yarn.lock ./
+COPY tsconfig.json tsconfig.json
 
 # RUN npm install -g yarn
 
 RUN yarn install
 
-COPY . .
+COPY apps/notifications apps/notifications
+COPY libs libs
 
-RUN npm run build
+RUN cd apps/notifications && yarn
 
+RUN npm run build notifications
 
 FROM node:18-alpine as production
 
@@ -30,4 +33,4 @@ RUN yarn install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/payments/main"]
+CMD ["node", "dist/apps/notifications/main"]

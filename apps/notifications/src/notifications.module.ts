@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { PaymentsController } from './payments.controller';
-import { PaymentsService } from './payments.service';
+import { NotificationsController } from './notifications.controller';
+import { NotificationsService } from './notifications.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { LoggerModule } from '@app/common';
@@ -11,12 +11,11 @@ import { LoggerModule } from '@app/common';
       isGlobal: true,
       validationSchema: Joi.object({
         PORT: Joi.number().required(),
-        STRIPE_SECRET_KEY: Joi.string().required(),
       }),
     }),
     LoggerModule,
   ],
-  controllers: [PaymentsController],
-  providers: [PaymentsService],
+  controllers: [NotificationsController],
+  providers: [NotificationsService],
 })
-export class PaymentsModule {}
+export class NotificationsModule {}

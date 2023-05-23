@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user';
 import { UsersRepository } from './users.repository';
-import { UsersDocument } from './model/users.schema';
+import { UsersDocument } from '../../../../libs/common/src/model/users.schema';
 import * as bcrypt from 'bcryptjs';
 import { Error } from 'mongoose';
 import { getUserDto } from './dto/get-user.dto';

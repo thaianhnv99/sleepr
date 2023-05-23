@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
-import { DatabaseModule, PAYMENTS_SERVICE } from '@app/common';
+import { DatabaseModule, NOTIFICATION_SERVICE } from '@app/common';
 import { ReservationsRepository } from './reservations.repository';
 import {
   ReservationDocument,
@@ -23,8 +23,8 @@ import { LoggerModule, AUTH_SERVICE } from '@app/common';
         PORT: Joi.string().required(),
         AUTH_HOST: Joi.string().required(),
         AUTH_PORT: Joi.string().required(),
-        PAYMENTS_HOST: Joi.string().required(),
-        PAYMENTS_PORT: Joi.number().required(),
+        NOTIFICATION_HOST: Joi.string().required(),
+        NOTIFICATION_PORT: Joi.number().required(),
       }),
     }),
     DatabaseModule.forFeature([
@@ -46,12 +46,12 @@ import { LoggerModule, AUTH_SERVICE } from '@app/common';
         inject: [ConfigService],
       },
       {
-        name: PAYMENTS_SERVICE,
+        name: NOTIFICATION_SERVICE,
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
           options: {
-            host: configService.get('PAYMENTS_HOST'),
-            port: configService.get('PAYMENTS_PORT'),
+            host: configService.get('NOTIFICATION_HOST'),
+            port: configService.get('NOTIFICATION_PORT'),
           },
         }),
         inject: [ConfigService],
