@@ -3,13 +3,13 @@ FROM node:18-alpine As development
 WORKDIR /usr/src/app
 
 COPY package.json ./
-COPY yarn.lock ./
+COPY pnpm-lock.yaml ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
-# RUN npm install -g yarn
+RUN npm install -g pnpm
 
-RUN yarn install
+RUN pnpm install
 
 COPY apps/notifications apps/notifications
 COPY libs libs
@@ -26,11 +26,11 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 
 COPY package.json ./
-COPY yarn.lock ./
+COPY pnpm-lock.yaml ./
 
-# RUN npm install -g yarn
+RUN npm install -g pnpm
 
-RUN yarn install --prod
+RUN pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 

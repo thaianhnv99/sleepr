@@ -11,6 +11,10 @@ import { LoggerModule } from '@app/common';
       isGlobal: true,
       validationSchema: Joi.object({
         PORT: Joi.number().required(),
+        GG_OAUTH_CLIENT_ID: Joi.string().required(),
+        GG_OAUTH_CLIENT_SECRET: Joi.string().required(),
+        GG_OAUTH_REFESH_TOKEN: Joi.string().required(),
+        SMTP_USER: Joi.string().required(),
       }),
     }),
     LoggerModule,

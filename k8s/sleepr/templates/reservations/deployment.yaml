@@ -23,3 +23,15 @@ spec:
                 secretKeyRef:
                   name: mongodb
                   key: connectionString
+            - name: PORT
+              value: '3004'
+            - name: AUTH_HOST
+              value: auth-tcp
+            - name: AUTH_PORT
+              value: '3002'
+            - name: NOTIFICATION_HOST
+              value: notifications
+            - name: NOTIFICATION_PORT
+              value: '3000'
+          ports:
+            - containerPort: 3004
